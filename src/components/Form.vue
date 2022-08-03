@@ -1,55 +1,30 @@
 <template>
-  <form @submit.prevent @addUser="addUser">
-    <h2>Добавление пользователя</h2>
+  <form @submit.prevent>
+    <h2>Редактировать название</h2>
     <label>
-      <span class="label-title">Имя</span>
-      <Input class="label-inpt" type="text" :value="user.name" @input.native="user.name = $event.target.value"/>
+      <span class="label-title">Название</span>
+      <Input class="label-inpt" type="text" :value="getCurrentElement.name" @input.native="getCurrentElement.name = $event.target.value"/>
     </label>
-    <label>
-      <span class="label-title">Телефон</span>
-      <Input class="label-inpt" type="text" :value="user.tel" @input.native="user.tel = $event.target.value"/>
-    </label>
-    <label>
-      <span class="label-title">Начальник</span>
-      <Select :elements="elements" v-model="user.head" @input.native="user.head = $event.target.value"/>
-    </label>
-    <Button class="form-btn" @click="addUser">Сохранить</Button>
+    <button class="btn-close" @click="closeModal"></button>
   </form>
 </template>
 
 <script>
-import Button from "./UI/Button";
+import {mapGetters} from "vuex";
+import {mapMutations} from "vuex";
 import Input from "./UI/Input";
-import Select from "./UI/Select";
 
 export default {
-  components: {Select, Input, Button},
+  components: {Input},
   props: {
     elements: {
       type: Array,
       required: true
     }
   },
-  data() {
-    return {
-      user: {
-        name: '',
-        tel: '',
-        head: '',
-        children: [],
-      }
-    }
-  },
+  computed: mapGetters(['getCurrentElement']),
   methods: {
-    addUser() {
-      this.user.id = Date.now()
-      this.$emit('addUser', this.user)
-      this.user = {
-        name: '',
-        tel: '',
-        head: '',
-      }
-    }
+    ...mapMutations(["closeModal"])
   }
 }
 </script>
@@ -59,6 +34,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  position: relative;
 }
 
 form > * {
@@ -67,6 +43,7 @@ form > * {
 
 form label {
   display: flex;
+  margin: 0 0 30px 0;
 }
 
 form label .label-title {
@@ -77,8 +54,15 @@ form label .label-inpt {
   width: 70%;
 }
 
-.form-btn {
-  width: fit-content;
+.btn-close {
+  background: url("~@/assets/close.svg") no-repeat center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  position: absolute;
+  cursor: pointer;
+  top: 5px;
+  right: 5px;
 }
 
 </style>

@@ -2,6 +2,8 @@
 
 The assignment can be found [here].
 
+Vue version 2. Vuex version 3
+
 ## Build Setup
 
 ``` bash
@@ -22,9 +24,8 @@ npm run build --report
 # About app
 
 - Approximate layout according to the layout
-- You can call a modal window
-- You can add a new user to any existing one
-- Added users are saved in localStorage
+- You can add edit title
+- You can delete folder or file
+- You can find the secret
 
-
-[here]: https://docs.google.com/document/d/1dlX54GtpclZIRMzUHNTgGK08FgMeza8Ux3EwJS_ZLUQ/edit
+[here]: https://gist.github.com/alexmgit/2921d8e36494fb909b202a776df03037
